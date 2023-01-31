@@ -1,4 +1,4 @@
-# Kubernetes for beginners training by Bogdan Stashchuk
+# Kubernetes for beginners training
 
 <br />
 <br />
@@ -106,7 +106,10 @@ kubectl logs {pod-name}
   https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 * Select Token and paste the token created earlier and press Sign In
-* You are now logged in with an admin 
+```yaml
+  eyJhbGciOiJSUzI1NiIsImtpZCI6InpuOUFUQlU5c1FxU1Ewa0VNWHNBMWJhVl........
+```
+* You are now logged in with an admin
 
 <br />
 <br />
