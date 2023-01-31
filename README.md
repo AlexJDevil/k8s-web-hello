@@ -73,13 +73,29 @@
 ## Install Kubernetes Dashboard 
 * Deploy Kubernetes Dashboard yaml
   
-  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-
+  wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+  kubectl apply -f ./recommended.yaml
+  
 * Create a Service Account
+  
+  kubectl apply -f ./adminuser.yaml
+
 * Create a ClusterRoleBinding
-* Run kubectl proxy
+
+  kubectl apply -f ./dashboard-adminuser.yaml
+
 * Get a Bearer Token
+
+  kubectl -n kubernetes-dashboard create token admin-user
+
+* Run kubectl proxy
+
+  kubectl proxy
+
 * Open the browser and navigate to URL
+
+  https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
 * Select Token and paste the token created earlier and press Sign In
 * You are now logged in with an admin 
 
@@ -87,9 +103,30 @@
 
 ## Install Kubernetes Metric Server
 * Install Helm
+
+  brew update
+  brew install helm
+
 * Add metrics-server repository
+
+  helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+  helm repo update
+
 * Create namespace metrics
+
+  kubectl create namespace metrics
+
 * Install metrics-server helm chart and add the option --set args={"--kubelet-insecure-tls=true"}
+
+  helm install metrics-server metrics-server/metrics-server --version 3.8.3 --namespace metrics --set args={"--kubelet-insecure-tls=true"}
+
+* Check the rollout status
+
+  kubectl -namespace metrics rollout status deployment metrics-server
+
+* Check the pods
+  
+  kubectl get pods --namespace metrics
 
 <br />
 
