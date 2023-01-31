@@ -13,30 +13,30 @@
 
 ## Get the Docker-Desktop node's ip address
 ```yaml
-    cat /etc/hosts
-    # To allow the same kube context to work on the host and the container:
-    127.0.0.1 kubernetes.docker.internal
+cat /etc/hosts
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
 ```
 <br />
 
 ## Application manifest files
-* index.mjs
-* package.json
-* package-lock.json
-
+```yaml
+index.mjs
+package.json
+package-lock.json
+```
 <br />
 
 ## K8s manisfest files
-* 
-*
-*
-*
+ 
+
 
 <br />
 
 ## Docker manifest files
-* Dockerfile
-
+```yaml
+Dockerfile
+```
 <br />
 
 ## K8s commands
@@ -44,35 +44,36 @@
 <br />
 
 ### Get K8s cluster info
-    kubectl cluster-info
-
+```yaml    
+kubectl cluster-info
+```
 ### Get basic info about K8s components
 ```yaml
-    kubectl get node
-    kubectl get pod
-    kubectl get svc
-    kubectl get all
+kubectl get node
+kubectl get pod
+kubectl get svc
+kubectl get all
 ```
 <br />
 
 ### Get extended info about components
 ```yaml
-    kubectl get pod -o wide
-    kubectl get node -o wide
+kubectl get pod -o wide
+kubectl get node -o wide
 ```
 
 <br />
 
 ### Get detailed info about a specific component
 ```yaml
-    kubectl describe svc {svc-name}
-    kubectl describe pod {pod-name}
+kubectl describe svc {svc-name}
+kubectl describe pod {pod-name}
 ```
 <br />
 
 ### Get application logs
 ```yaml
-    kubectl logs {pod-name}
+kubectl logs {pod-name}
 ```
 
 <br />
@@ -80,7 +81,7 @@
 
 ## Install Kubernetes Dashboard 
 * Deploy Kubernetes Dashboard yaml
-  
+  ```yaml
   wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
   kubectl apply -f ./recommended.yaml
   
@@ -141,8 +142,8 @@
 
 ### Get top pods and nodes
 ```yaml
-    kubectl top pods
-    kubectl top node
+kubectl top pods
+kubectl top node
 ```
 <br />
 
