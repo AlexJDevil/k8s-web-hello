@@ -53,6 +53,7 @@ kubectl get node
 kubectl get pod
 kubectl get svc
 kubectl get all
+kubectl delete all -all
 ```
 <br />
 
@@ -150,8 +151,20 @@ kubectl top node
 ```
 <br />
 
+### Clean up everything
+```yaml
+kubectl -n kubernetes-dashboard delete serviceaccount admin-user
+kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
+kubectl delete -n kubernetes-dashboard
+kubectl -n metrics delete deployment metrics-server
+kubectl delete -n metrics 
+```
+
+<br />
+
 ## Stop and quit your Kubernetes cluster
 * To pause or quit click on the Moby icon in Upper right corner and chose either pause or stop 
+
 
 <br />
 <br />
