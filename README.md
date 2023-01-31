@@ -12,10 +12,11 @@
 <br />
 
 ## Get the Docker-Desktop node's ip address
+```yaml
     cat /etc/hosts
     # To allow the same kube context to work on the host and the container:
     127.0.0.1 kubernetes.docker.internal
-
+```
 <br />
 
 ## Application manifest files
@@ -46,28 +47,35 @@
     kubectl cluster-info
 
 ### Get basic info about K8s components
+```yaml
     kubectl get node
     kubectl get pod
     kubectl get svc
     kubectl get all
-
+```
 <br />
 
 ### Get extended info about components
+```yaml
     kubectl get pod -o wide
     kubectl get node -o wide
+```
 
 <br />
 
 ### Get detailed info about a specific component
+```yaml
     kubectl describe svc {svc-name}
     kubectl describe pod {pod-name}
-
+```
 <br />
 
 ### Get application logs
+```yaml
     kubectl logs {pod-name}
-    
+```
+
+<br />
 <br />
 
 ## Install Kubernetes Dashboard 
@@ -77,63 +85,65 @@
   kubectl apply -f ./recommended.yaml
   
 * Create a Service Account
-  
+  ```yaml
   kubectl apply -f ./adminuser.yaml
 
 * Create a ClusterRoleBinding
-
+  ```yaml
   kubectl apply -f ./dashboard-adminuser.yaml
 
 * Get a Bearer Token
-
+  ```yaml
   kubectl -n kubernetes-dashboard create token admin-user
 
 * Run kubectl proxy
-
+  ```yaml
   kubectl proxy
 
 * Open the browser and navigate to URL
-
+  ```yaml
   https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 * Select Token and paste the token created earlier and press Sign In
 * You are now logged in with an admin 
 
 <br />
+<br />
 
 ## Install Kubernetes Metric Server
 * Install Helm
-
+  ```yaml
   brew update
   brew install helm
 
 * Add metrics-server repository
-
+  ```yaml
   helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
   helm repo update
 
 * Create namespace metrics
-
+  ```yaml
   kubectl create namespace metrics
 
-* Install metrics-server helm chart and add the option --set args={"--kubelet-insecure-tls=true"}
-
+* Install metrics-server helm chart
+  ```yaml
   helm install metrics-server metrics-server/metrics-server --version 3.8.3 --namespace metrics --set args={"--kubelet-insecure-tls=true"}
 
 * Check the rollout status
-
+  ```yaml
   kubectl -namespace metrics rollout status deployment metrics-server
 
 * Check the pods
-  
+  ```yaml
   kubectl get pods --namespace metrics
 
 <br />
 
 ### Get top pods and nodes
+```yaml
     kubectl top pods
     kubectl top node
-
+```
 <br />
 
 ## Stop and quit your Kubernetes cluster
