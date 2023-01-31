@@ -1,8 +1,7 @@
 # Kubernetes for beginners training by Bogdan Stashchuk
 
 <br />
-
-### Git repository for k8s-web-hello project
+<br />
 
 ## Enable Kubernetes single-node cluster on Docker-Desktop 
 * Kubernetes can be enabled from Kubernetes settings panel
@@ -72,7 +71,10 @@
 <br />
 
 ## Install Kubernetes Dashboard 
-* Deploy Kubernetes Dashboard yaml 
+* Deploy Kubernetes Dashboard yaml
+  
+  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
 * Create a Service Account
 * Create a ClusterRoleBinding
 * Run kubectl proxy
