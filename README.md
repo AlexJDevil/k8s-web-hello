@@ -1,6 +1,5 @@
 # Kubernetes for beginners training
 
-tbr />
 <br />
 
 ## Enable Kubernetes single-node cluster on Docker-Desktop 
