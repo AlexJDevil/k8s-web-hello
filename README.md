@@ -86,15 +86,15 @@ kubectl logs {pod-name}
 * Deploy Kubernetes Dashboard yaml
   ```yaml
   wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-  kubectl apply -f ./recommended.yaml
+  kubectl apply -f ./dashboard/recommended.yaml
   
 * Create a Service Account
   ```yaml
-  kubectl apply -f ./adminuser.yaml
+  kubectl apply -f ./dashboard/adminuser.yaml
 
 * Create a ClusterRoleBinding
   ```yaml
-  kubectl apply -f ./dashboard-adminuser.yaml
+  kubectl apply -f ./dashboard/dashboard-adminuser.yaml
 
 * Get a Bearer Token
   ```yaml
