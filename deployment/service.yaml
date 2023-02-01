@@ -1,22 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
   name: k8s-web-hello
 spec:
+  type: LoadBalancer
   selector:
-    matchLabels:
-      app: k8s-web-hello
-  template:
-    metadata:
-      labels:
-        app: k8s-web-hello
-    spec:
-      containers:
-      - name: k8s-web-hello
-        image: alexjdevil/k8s-web-hello:v1.0
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
-        ports:
-        - containerPort: 3000
+    app: k8s-web-hello
+  ports:
+  - port: 3030
+    targetPort: 3000

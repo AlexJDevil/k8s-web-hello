@@ -1,6 +1,6 @@
 # Kubernetes for beginners training
 
-<br />
+tbr />
 <br />
 
 ## Enable Kubernetes single-node cluster on Docker-Desktop 
@@ -28,8 +28,10 @@ package-lock.json
 <br />
 
 ## K8s manisfest files
- 
-
+```yaml
+deployment/deployment.yaml
+deployment/service.yaml
+``` 
 
 <br />
 
