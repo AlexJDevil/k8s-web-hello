@@ -105,7 +105,7 @@ kubectl logs {pod-name}
 
 * Open the browser and navigate to URL
   ```yaml
-  https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+  http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
 * Select Token and paste the token created earlier and press Sign In
 ```yaml
