@@ -18,11 +18,28 @@ cat /etc/hosts
 ```
 <br />
 
+## Project Overview
+* Create a new deployment for our node.js application, named k8s-web-hello
+* This application contains one route
+```yaml
+  '/'
+```
+* We are exposing this deployment using a service type LoadBalancer
+* Using LoadBalancer will enable connecting using the LoadBalancer IP address
+
+<br />
+
 ## Application manifest files
 ```yaml
-index.mjs
-package.json
-package-lock.json
+application/index.mjs
+application/package.json
+application/package-lock.json
+```
+<br />
+
+## Docker manifest files
+```yaml
+application/Dockerfile
 ```
 <br />
 
@@ -34,9 +51,14 @@ deployment/service.yaml
 
 <br />
 
-## Docker manifest files
+## Docker commands
+
+<br />
+
+### Build and push the image to Docker Hub
 ```yaml
-Dockerfile
+docker build . -t alexjdevil/k8s-web-hello:v1.0
+docker push alexjdevil/k8s-web-hello:v1.0
 ```
 <br />
 
@@ -48,6 +70,9 @@ Dockerfile
 ```yaml    
 kubectl cluster-info
 ```
+
+<br />
+
 ### Get basic info about K8s components
 ```yaml
 kubectl get node
@@ -71,94 +96,41 @@ kubectl get node -o wide
 kubectl describe svc {svc-name}
 kubectl describe pod {pod-name}
 ```
+
 <br />
 
 ### Get application logs
 ```yaml
 kubectl logs {pod-name}
 ```
-
-<br />
 <br />
 
-## Install Kubernetes Dashboard 
-* Deploy Kubernetes Dashboard yaml
-  ```yaml
-  wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-  kubectl apply -f ./dashboard/recommended.yaml
-  
-* Create a Service Account
-  ```yaml
-  kubectl apply -f ./dashboard/adminuser.yaml
-
-* Create a ClusterRoleBinding
-  ```yaml
-  kubectl apply -f ./dashboard/dashboard-adminuser.yaml
-
-* Get a Bearer Token
-  ```yaml
-  kubectl -n kubernetes-dashboard create token admin-user
-
-* Run kubectl proxy
-  ```yaml
-  kubectl proxy
-
-* Open the browser and navigate to URL
-  ```yaml
-  http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-
-* Select Token and paste the token created earlier and press Sign In
+## Deploy everything
+* Apply deployment and service yaml's
 ```yaml
-  eyJhbGciOiJSUzI1NiIsImtpZCI6InpuOUFUQlU5c1FxU1Ewa0VNWHNBMWJhVl........
+  kubectl apply -f ./deployment/deployment.yaml
+  kubectl apply -f ./deployment/service.yaml
 ```
-* You are now logged in with an admin
-
-<br />
-<br />
-
-## Install Kubernetes Metric Server
-* Install Helm
-  ```yaml
-  brew update
-  brew install helm
-
-* Add metrics-server repository
-  ```yaml
-  helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-  helm repo update
-
-* Create namespace metrics
-  ```yaml
-  kubectl create namespace metrics
-
-* Install metrics-server helm chart
-  ```yaml
-  helm install metrics-server metrics-server/metrics-server --version 3.8.3 --namespace metrics --set args={"--kubelet-insecure-tls=true"}
-
-* Check the rollout status
-  ```yaml
-  kubectl -namespace metrics rollout status deployment metrics-server
-
-* Check the pods
-  ```yaml
-  kubectl get pods --namespace metrics
-
-<br />
-
-### Get top pods and nodes
+* Confirm the deployment, pods and service were created and started
 ```yaml
-kubectl top pods
-kubectl top node
+  kubectl get pods -n default
+  kubectl get services -n default
+```
+* Check deployment and service details
+```yaml
+  kubectl describe deployment deployment
+  kubectl describe service 
+```
+* Access the Application endpoint
+```yaml
+  http://localhost:3030
 ```
 <br />
 
 ### Clean up everything
 ```yaml
-kubectl -n kubernetes-dashboard delete serviceaccount admin-user
-kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
-kubectl delete -n kubernetes-dashboard
-kubectl -n metrics delete deployment metrics-server
-kubectl delete -n metrics 
+kubectl delete -f deployment/deployment.yaml
+kubectl delete -f deployment/service.yaml 
 ```
 
 <br />
@@ -166,15 +138,9 @@ kubectl delete -n metrics
 ## Stop and quit your Kubernetes cluster
 * To pause or quit click on the Moby icon in Upper right corner and chose either pause or stop 
 
-
-<br />
 <br />
 
 ## Links
-* Deploying Kubernetes Dashboard: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
-* Accessing Kubernetes Dashboard: https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
-* Kubernetes Metrics-Server: https://github.com/kubernetes-sigs/metrics-server
-* Kubernetes Metrics-Server Releases: https://github.com/kubernetes-sigs/metrics-server/releases
 * k8s official documentation: https://kubernetes.io/docs/home/
 * webapp code repo: https://github.com/AlexJDevil/k8s-web-hello
 * webapp image on Docker Hub: https://hub.docker.com/repository/docker/alexjdevil/k8s-web-hello/general
