@@ -143,5 +143,5 @@ kubectl delete -f deployment/service.yaml
 ## Links
 * K8s official documentation: https://kubernetes.io/docs/home/
 * Application code repo: https://github.com/AlexJDevil/k8s-web-hello
-* Application image on Docker Hub: https://hub.docker.com/repository/docker/alexjdevil/k8s-web-hello/general
+* k8s-web-hello image on Docker Hub: https://hub.docker.com/repository/docker/alexjdevil/k8s-web-hello/general
 
